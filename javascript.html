@@ -1,0 +1,652 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>StudyBuddy - Task Planner</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6ff;
+            color: #1e293b;
+        }
+
+        header {
+            background: white;
+            padding: 20px 8%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .navbar {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #6366f1;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px 40px;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: #6366f1;
+        }
+
+        .hero p {
+            color: #64748b;
+        }
+
+        .add-section {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .add-section h2 {
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            gap: 12px;
+        }
+
+        input,
+        select {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        button {
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #6366f1;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #4f46e5;
+        }
+
+        .tasks {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .heading {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+
+        #taskCount {
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 7px 14px;
+            border-radius: 20px;
+        }
+
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .task-card {
+            background: white;
+            padding: 22px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.07);
+        }
+
+        .task-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+        }
+
+        .subject {
+            color: #6366f1;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .task-card h3 {
+            margin: 8px 0;
+        }
+
+        .status {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .completed {
+            opacity: 0.65;
+        }
+
+        footer {
+            margin-top: 60px;
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media (max-width: 800px) {
+
+            .task-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            form {
+                flex-direction: column;
+            }
+
+            .task-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <header>
+
+        <div class="navbar">
+
+            <div class="logo">
+                📚 StudyBuddy
+            </div>
+
+            <span>
+                Student Task Planner
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <section class="hero">
+
+            <h1>
+                Plan Your <span>Study.</span>
+                Achieve More.
+            </h1>
+
+            <p>
+                Add and manage your study tasks easily.
+            </p>
+
+        </section>
+
+
+        <section class="add-section">
+
+            <h2>
+                Add New Task
+            </h2>
+
+            <form id="taskForm">
+
+                <input
+                    type="text"
+                    id="taskName"
+                    placeholder="Enter task name"
+                    required
+                >
+
+                <select id="subject" required>
+
+                    <option value="">
+                        Select Subject
+                    </option>
+
+                    <option value="DSA">
+                        DSA
+                    </option>
+
+                    <option value="Web Development">
+                        Web Development
+                    </option>
+
+                    <option value="Physics">
+                        Physics
+                    </option>
+
+                    <option value="Mathematics">
+                        Mathematics
+                    </option>
+
+                    <option value="Project">
+                        Project
+                    </option>
+
+                </select>
+
+                <button type="submit">
+                    + Add Task
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <section class="tasks">
+
+            <div class="heading">
+
+                <h2>
+                    My Tasks
+                </h2>
+
+                <span id="taskCount">
+                    0 Tasks
+                </span>
+
+            </div>
+
+            <div
+                id="taskContainer"
+                class="task-grid">
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 StudyBuddy | Study Smarter 🚀
+        </p>
+
+    </footer>
+
+
+    <script type="module">
+
+        // ==========================================
+        // MODULE
+        // ==========================================
+
+        /*
+            A module is created using export/import.
+            Everything is kept inside this single HTML file.
+        */
+
+        const moduleCode = `
+
+            export const defaultTasks = [
+
+                {
+                    id: 1,
+                    title: "Complete DSA Assignment",
+                    subject: "DSA",
+                    completed: false
+                },
+
+                {
+                    id: 2,
+                    title: "Revise CSS Grid",
+                    subject: "Web Development",
+                    completed: false
+                },
+
+                {
+                    id: 3,
+                    title: "Physics Revision",
+                    subject: "Physics",
+                    completed: true
+                }
+
+            ];
+
+        `;
+
+
+        // Create module dynamically
+
+        const moduleBlob =
+            new Blob([moduleCode],
+            { type: "text/javascript" });
+
+
+        const moduleURL =
+            URL.createObjectURL(moduleBlob);
+
+
+        // ==========================================
+        // IMPORT MODULE
+        // ==========================================
+
+        import(moduleURL).then(
+            ({ defaultTasks }) => {
+
+                startApp(defaultTasks);
+
+            }
+        );
+
+
+        // ==========================================
+        // MAIN APPLICATION
+        // ==========================================
+
+        const startApp = (defaultTasks) => {
+
+
+            // ======================================
+            // CONST
+            // ======================================
+
+            const form =
+                document.getElementById("taskForm");
+
+            const taskInput =
+                document.getElementById("taskName");
+
+            const subjectInput =
+                document.getElementById("subject");
+
+            const container =
+                document.getElementById("taskContainer");
+
+            const count =
+                document.getElementById("taskCount");
+
+
+            // ======================================
+            // LET
+            // ======================================
+
+            let tasks = [...defaultTasks];
+
+
+            // ======================================
+            // ARROW FUNCTION
+            // ======================================
+
+            const displayTasks = () => {
+
+                container.innerHTML = "";
+
+
+                tasks.forEach(task => {
+
+
+                    // ==================================
+                    // DESTRUCTURING
+                    // ==================================
+
+                    const {
+                        id,
+                        title,
+                        subject,
+                        completed
+                    } = task;
+
+
+                    // ==================================
+                    // TEMPLATE LITERAL
+                    // ==================================
+
+                    container.innerHTML += `
+
+                        <article
+                            class="task-card
+                            ${completed ? "completed" : ""}">
+
+                            <div class="task-icon">
+                                📖
+                            </div>
+
+                            <span class="subject">
+                                ${subject}
+                            </span>
+
+                            <h3>
+                                ${title}
+                            </h3>
+
+                            <p class="status">
+
+                                ${
+                                    completed
+                                    ? "✅ Completed"
+                                    : "⏳ In Progress"
+                                }
+
+                            </p>
+
+                            <button
+                                class="complete-btn"
+                                data-id="${id}">
+
+                                ${
+                                    completed
+                                    ? "Undo"
+                                    : "Mark Complete"
+                                }
+
+                            </button>
+
+                        </article>
+
+                    `;
+
+                });
+
+
+                updateCount();
+
+            };
+
+
+            // ======================================
+            // SPREAD OPERATOR
+            // ======================================
+
+            const addTask = (newTask) => {
+
+                tasks = [
+                    ...tasks,
+                    newTask
+                ];
+
+                displayTasks();
+
+            };
+
+
+            // ======================================
+            // REST OPERATOR
+            // ======================================
+
+            const countTasks = (...allTasks) => {
+
+                return allTasks.length;
+
+            };
+
+
+            // ======================================
+            // UPDATE COUNT
+            // ======================================
+
+            const updateCount = () => {
+
+                const total =
+                    countTasks(...tasks);
+
+                count.textContent =
+                    `${total} ${total === 1
+                    ? "Task"
+                    : "Tasks"}`;
+
+            };
+
+
+            // ======================================
+            // ADD TASK
+            // ======================================
+
+            form.addEventListener(
+                "submit",
+                (event) => {
+
+                    event.preventDefault();
+
+
+                    const title =
+                        taskInput.value.trim();
+
+                    const subject =
+                        subjectInput.value;
+
+
+                    const newTask = {
+
+                        id: Date.now(),
+
+                        title,
+
+                        subject,
+
+                        completed: false
+
+                    };
+
+
+                    addTask(newTask);
+
+
+                    form.reset();
+
+                }
+            );
+
+
+            // ======================================
+            // COMPLETE / UNDO
+            // ======================================
+
+            container.addEventListener(
+                "click",
+                (event) => {
+
+                    if (
+                        !event.target.classList
+                        .contains("complete-btn")
+                    ) {
+                        return;
+                    }
+
+
+                    const id =
+                        Number(
+                            event.target.dataset.id
+                        );
+
+
+                    tasks = tasks.map(task => {
+
+                        if (task.id === id) {
+
+                            return {
+
+                                // SPREAD OBJECT
+
+                                ...task,
+
+                                completed:
+                                    !task.completed
+
+                            };
+
+                        }
+
+                        return task;
+
+                    });
+
+
+                    displayTasks();
+
+                }
+            );
+
+
+            // ======================================
+            // FIRST DISPLAY
+            // ======================================
+
+            displayTasks();
+
+        };
+
+    </script>
+
+</body>
+
+</html>
+```
