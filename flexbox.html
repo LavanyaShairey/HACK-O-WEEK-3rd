@@ -1,0 +1,675 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Campus Event Hub</title>
+
+    <style>
+
+        /* =========================
+           CSS VARIABLES
+        ========================= */
+
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #5b21b6;
+            --background: #f8f7ff;
+            --card: #ffffff;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --light: #ede9fe;
+            --spacing: 20px;
+            --radius: 14px;
+        }
+
+
+        /* =========================
+           RESET
+        ========================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: var(--background);
+            color: var(--text);
+        }
+
+
+        /* =========================
+           NAVBAR - FLEXBOX
+        ========================= */
+
+        header {
+            background: var(--card);
+            padding: 18px 8%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .navbar {
+
+            /* FLEXBOX */
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            text-align: center;
+            padding: 65px 20px;
+        }
+
+        .hero h1 {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            max-width: 650px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           EVENTS SECTION
+        ========================= */
+
+        .events {
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            color: var(--muted);
+        }
+
+
+        /* =========================
+           CSS GRID
+        ========================= */
+
+        .event-grid {
+
+            /* GRID */
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: var(--spacing);
+        }
+
+
+        /* =========================
+           EVENT CARD
+        ========================= */
+
+        .event-card {
+            background: var(--card);
+
+            border-radius: var(--radius);
+
+            padding: 25px;
+
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+
+            transition: transform 0.2s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .event-icon {
+            width: 55px;
+            height: 55px;
+
+            background: var(--light);
+
+            border-radius: 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 27px;
+
+            margin-bottom: 18px;
+        }
+
+        .event-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .event-card p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .event-date {
+            color: var(--primary) !important;
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .register-btn {
+            display: inline-block;
+
+            margin-top: 15px;
+
+            background: var(--primary);
+            color: white;
+
+            padding: 10px 18px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .register-btn:hover {
+            background: var(--primary-dark);
+        }
+
+
+        /* =========================
+           WHY SECTION - FLEXBOX
+        ========================= */
+
+        .why-section {
+            max-width: 1100px;
+            margin: 60px auto;
+            padding: 20px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: var(--spacing);
+        }
+
+        .why-card {
+            flex: 1;
+
+            background: var(--light);
+
+            padding: 25px;
+
+            border-radius: var(--radius);
+
+            text-align: center;
+        }
+
+        .why-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .why-card p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: var(--text);
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 30px;
+        }
+
+
+        /* =========================
+           RESPONSIVE DESIGN
+        ========================= */
+
+        /* TABLET */
+
+        @media (max-width: 850px) {
+
+            .event-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .why-section {
+                flex-wrap: wrap;
+            }
+
+            .why-card {
+                flex-basis: 45%;
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 550px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav {
+                gap: 15px;
+            }
+
+            .hero {
+                padding: 45px 20px;
+            }
+
+            .hero h1 {
+                font-size: 31px;
+            }
+
+            /* One column on mobile */
+
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-section {
+                flex-direction: column;
+            }
+
+            .why-card {
+                flex-basis: 100%;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+        <div class="navbar">
+
+            <div class="logo">
+                🎓 CampusEvents
+            </div>
+
+            <!-- FLEXBOX -->
+
+            <nav>
+                <a href="#">Home</a>
+                <a href="#events">Events</a>
+                <a href="#why">Why Join?</a>
+            </nav>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         HERO SECTION
+    ========================== -->
+
+    <section class="hero">
+
+        <h1>
+            Discover. <span>Participate.</span> Connect.
+        </h1>
+
+        <p>
+            Find exciting college events, workshops, hackathons
+            and activities happening around your campus.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         EVENTS - CSS GRID
+    ========================== -->
+
+    <section class="events" id="events">
+
+        <div class="section-title">
+
+            <h2>
+                Upcoming Events
+            </h2>
+
+            <p>
+                Don't miss what's happening on campus!
+            </p>
+
+        </div>
+
+
+        <div class="event-grid">
+
+
+            <!-- EVENT 1 -->
+
+            <article class="event-card">
+
+                <div class="event-icon">
+                    💻
+                </div>
+
+                <h3>
+                    Hack-O-Week
+                </h3>
+
+                <p class="event-date">
+                    📅 15 September 2026
+                </p>
+
+                <p>
+                    Build innovative solutions and compete
+                    with talented student teams.
+                </p>
+
+                <a href="#" class="register-btn">
+                    Register
+                </a>
+
+            </article>
+
+
+            <!-- EVENT 2 -->
+
+            <article class="event-card">
+
+                <div class="event-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    AI Workshop
+                </h3>
+
+                <p class="event-date">
+                    📅 20 September 2026
+                </p>
+
+                <p>
+                    Learn the fundamentals of Artificial
+                    Intelligence from industry experts.
+                </p>
+
+                <a href="#" class="register-btn">
+                    Register
+                </a>
+
+            </article>
+
+
+            <!-- EVENT 3 -->
+
+            <article class="event-card">
+
+                <div class="event-icon">
+                    🎨
+                </div>
+
+                <h3>
+                    Cultural Fest
+                </h3>
+
+                <p class="event-date">
+                    📅 25 September 2026
+                </p>
+
+                <p>
+                    Celebrate creativity, music, dance
+                    and culture with fellow students.
+                </p>
+
+                <a href="#" class="register-btn">
+                    Register
+                </a>
+
+            </article>
+
+
+            <!-- EVENT 4 -->
+
+            <article class="event-card">
+
+                <div class="event-icon">
+                    ⚽
+                </div>
+
+                <h3>
+                    Sports Day
+                </h3>
+
+                <p class="event-date">
+                    📅 30 September 2026
+                </p>
+
+                <p>
+                    Participate in exciting sports and
+                    team competitions.
+                </p>
+
+                <a href="#" class="register-btn">
+                    Register
+                </a>
+
+            </article>
+
+
+            <!-- EVENT 5 -->
+
+            <article class="event-card">
+
+                <div class="event-icon">
+                    📚
+                </div>
+
+                <h3>
+                    Study Workshop
+                </h3>
+
+                <p class="event-date">
+                    📅 5 October 2026
+                </p>
+
+                <p>
+                    Learn effective study techniques,
+                    planning and productivity.
+                </p>
+
+                <a href="#" class="register-btn">
+                    Register
+                </a>
+
+            </article>
+
+
+            <!-- EVENT 6 -->
+
+            <article class="event-card">
+
+                <div class="event-icon">
+                    🚀
+                </div>
+
+                <h3>
+                    Startup Meet
+                </h3>
+
+                <p class="event-date">
+                    📅 10 October 2026
+                </p>
+
+                <p>
+                    Meet student entrepreneurs and explore
+                    new startup ideas.
+                </p>
+
+                <a href="#" class="register-btn">
+                    Register
+                </a>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         WHY JOIN - FLEXBOX
+    ========================== -->
+
+    <section class="why-section" id="why">
+
+
+        <div class="why-card">
+
+            <h3>
+                🎯 Learn
+            </h3>
+
+            <p>
+                Gain new skills through workshops
+                and technical events.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <h3>
+                🤝 Connect
+            </h3>
+
+            <p>
+                Meet students with similar interests
+                and build new connections.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <h3>
+                🏆 Participate
+            </h3>
+
+            <p>
+                Take part in competitions and
+                showcase your talent.
+            </p>
+
+        </div>
+
+
+        <div class="why-card">
+
+            <h3>
+                🚀 Grow
+            </h3>
+
+            <p>
+                Develop your confidence and
+                practical experience.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        <p>
+            © 2026 CampusEvents | College Event Portal
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>
+```
