@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Food Order Tracker</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            background: #f5f5ff;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .box {
+            background: white;
+            max-width: 500px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px #ccc;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            background: #6366f1;
+            color: white;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #4f46e5;
+        }
+
+        #status {
+            margin-top: 25px;
+            font-size: 18px;
+            line-height: 2;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="box">
+
+        <h1>Food Order Tracker</h1>
+
+        <p>
+            Track your food order using
+            Asynchronous JavaScript
+        </p>
+
+        <button onclick="placeOrder()">
+            Place Order
+        </button>
+
+        <div id="status">
+            Click the button to order
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // =====================================
+        // CALLBACK
+        // =====================================
+
+        function prepareFood(callback) {
+
+            setTimeout(() => {
+
+                document.getElementById("status")
+                    .innerHTML +=
+                    "<br> Food is prepared!";
+
+                callback();
+
+            }, 2000);
+
+        }
+
+
+        // =====================================
+        // PROMISE
+        // =====================================
+
+        function deliverFood() {
+
+            return new Promise((resolve) => {
+
+                setTimeout(() => {
+
+                    resolve(" Food delivered!");
+
+                }, 2000);
+
+            });
+
+        }
+
+
+        // =====================================
+        // ASYNC / AWAIT
+        // =====================================
+
+        async function placeOrder() {
+
+            const status =
+                document.getElementById("status");
+
+            status.innerHTML =
+                " Order placed...";
+
+
+            // CALLBACK
+
+            prepareFood(async () => {
+
+                // PROMISE + ASYNC/AWAIT
+
+                const message =
+                    await deliverFood();
+
+                status.innerHTML +=
+                    `<br>${message}`;
+
+                status.innerHTML +=
+                    "<br> Enjoy your meal!";
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
+

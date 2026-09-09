@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Performance</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            background: #f2f2ff;
+            padding: 30px;
+        }
+
+        .box {
+            background: white;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 12px;
+        }
+
+        button {
+            padding: 10px 15px;
+            margin: 5px;
+            border: none;
+            border-radius: 6px;
+            background: #6366f1;
+            color: white;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🎓 Student Performance</h1>
+
+    <div class="box">
+
+        <button onclick="showAll()">All Students</button>
+
+        <button onclick="showPassed()">Passed</button>
+
+        <button onclick="showTopper()">Topper</button>
+
+        <button onclick="showPercentage()">Percentage</button>
+
+        <div id="result"></div>
+
+    </div>
+
+
+    <script>
+
+        
+        const students = [
+            { name: "Aman", marks: 80 },
+            { name: "Riya", marks: 90 },
+            { name: "Rahul", marks: 35 },
+            { name: "Sneha", marks: 75 }
+        ];
+
+
+        
+        function showAll() {
+
+            document.getElementById("result").innerHTML =
+                students.map(s =>
+                    `${s.name} - ${s.marks} marks`
+                ).join("<br>");
+
+        }
+
+
+        
+        function showPassed() {
+
+            const passed = students.filter(
+                s => s.marks >= 40
+            );
+
+            document.getElementById("result").innerHTML =
+                passed.map(s =>
+                    `${s.name} - Passed`
+                ).join("<br>");
+
+        }
+
+
+        
+        function showTopper() {
+
+            const topper = students.reduce(
+                (a, b) =>
+                    a.marks > b.marks ? a : b
+            );
+
+            document.getElementById("result").innerHTML =
+                `🏆 Topper: ${topper.name}<br>
+                 Marks: ${topper.marks}`;
+
+        }
+
+
+        
+        function showPercentage() {
+
+            const percentage = students.map(
+                s => `${s.name}: ${s.marks}%`
+            );
+
+            document.getElementById("result").innerHTML =
+                percentage.join("<br>");
+
+        }
+
+
+        
+        const student = students.find(
+            s => s.name === "Riya"
+        );
+
+
+        
+        const hasFailed =
+            students.some(s => s.marks < 40);
+
+
+        
+        const allPassed =
+            students.every(s => s.marks >= 40);
+
+
+        console.log("Found Student:", student);
+        console.log("Any student failed:", hasFailed);
+        console.log("Everyone passed:", allPassed);
+
+
+        
+        showAll();
+
+    </script>
+
+</body>
+</html>
+
